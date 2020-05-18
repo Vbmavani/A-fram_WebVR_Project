@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width">
+
+  <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+  <!-- <script src="https://rawgit.com/aframevr/aframe/ddaef01/dist/aframe-master.min.js"></script> -->
+
+  <script src="components/arrow-key-rotation.js"></script>
+  <script src="components/play-on-window-click.js"></script>
+  <script src="components/play-on-vrdisplayactivate-or-enter-vr.js"></script>
+  <script src="components/hide-once-playing.js"></script>
+  <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+  <script src="components/scale-on-mouseenter.js"></script>
+  <script src="components/play-video.js"></script>
+</head>
+
+<body>
+  <a-scene>
+    <a-assets>
+      <video id="video1" style="display:none" autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
+        <source type="video/mp4" src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/" />
+      </video>
+      <video id="video2" style="display: none" crossorigin="anonymous" autoplay loop playsinline webkit-playsinline>
+        <source type="video/mp4" src="assets/paris-by-diego.mp4">
+      </video>
+      <img id="img1" src="assets/img1.jpg"></img>
+      <img id="img2" src="assets/img2.jpg"></img>
+
+    </a-assets>
+
+    <a-camera wasd-controls-enabled="false" arrow-key-rotation>
+      <a-plane color="black" position="0 0 -0.1" opacity="0" visible="false">
+        <a-animation class="fade" attribute="opacity" from="0" to="1" dur="1000" begin="fade" direction="alternate" repeat="1"></a-animation>
+      </a-plane>
+      <a-cursor color="white" scale="1.1"></a-cursor>
+    </a-camera>
+
+    <a-light color="white" intensity=".5" type="ambient"></a-light>
+
+    <a-entity environment="preset: threetowers">
+
+    </a-entity>
+
+    <a-image id="panel1" class="image" src="#img1" position="-3 2 -6" width="16" scale="0.3 0.3 0.3" height="9" rotation="0 15 0"
+      play-video="src:#video1" scale-on-mouseenter>
+      <a-animation attribute="scale" from="0.3 0.3 0.3" to="0.35 0.35 0.35" dur="100" begin="toggle" direction="">
+      </a-animation>
+      <a-animation class="fade" attribute="scale" from="0.3 0.3 0.3" to="1 1 1" dur="1000" begin="fade" direction="">
+      </a-animation>
+    </a-image>
+
+    <a-image id="panel2" class="image" src="#img2" position="3 2 -6" width="16" scale="0.3 0.3 0.3" height="9" rotation="0 -15 0"
+      play-video="src:#video2" scale-on-mouseenter>
+      <a-animation attribute="scale" from="0.3 0.3 0.3" to="0.35 0.35 0.35" dur="100" begin="toggle" direction="">
+      </a-animation>
+      <a-animation class="fade" attribute="scale" from="0.3 0.3 0.3" to="0.5 0.5 0.5" dur="100" begin="fade" easing="ease-out">
+      </a-animation>
+    </a-image>
+
+    <a-videosphere rotation="0 180 0 " src="#video1" play-on-window-click play-on-vrdisplayactivate-or-enter-vr>
+    </a-videosphere>
+
+
+  </a-scene>
+</body>
+
+</html>
